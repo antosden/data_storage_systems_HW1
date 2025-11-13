@@ -48,6 +48,7 @@
    - standard_cost
   
   Среди вышеперечисленных полей нет возможности выбрать первичный ключ, тк по всем ним присутствуют дубликаты. 
+  
   Причем были найдены записи product_id = 0, при котором поля brand, product_line, product_class, product_scale, standard_cost пусты, а у product_size 197 уникальных значения. 
  <img width="1161" height="706" alt="изображение" src="https://github.com/user-attachments/assets/a4f8e9f9-3192-4cd3-aa0d-b080a96f1e2b" />
 
@@ -57,7 +58,9 @@
 
  <img width="1032" height="645" alt="изображение" src="https://github.com/user-attachments/assets/73ab181a-fcf5-46cd-9700-45e04672f4c6" />
 
- При анализе полей было выявлено, что уникальное значение поля будет выдавать комбинация [product_id, product_size]. Проверка: в with отобраны поля для декомпозиции в таблицу product, сгруппированы по предполагаемому составному первичному ключу [product_id, product_size], и посчитано количество строк count. Результат отсортирован по count по убыванию
+ При анализе полей было выявлено, что уникальное значение поля будет выдавать комбинация [product_id, product_size]. 
+ 
+ Проверка: в with отобраны поля для декомпозиции в таблицу product, сгруппированы по предполагаемому составному первичному ключу [product_id, product_size], и посчитано количество строк count. Результат отсортирован по count по убыванию
  
  <img width="499" height="764" alt="изображение" src="https://github.com/user-attachments/assets/05fadf06-096f-45f6-95fe-38bcaa3bb196" />
 
@@ -75,8 +78,8 @@
 
   customer - не находится в 3НФ: приведена к 2НФ, однако присутствуют транзитивные зависимости:
   
-  Поля адреса: customer_id -> address -> postcode -> state -> country - вынесем в таблицу address
-  Поля работы: customer_id -> job_title -> job_industry_category - вынесем в таблицу job
+  - Поля адреса: customer_id -> address -> postcode -> state -> country - вынесем в таблицу address
+  - Поля работы: customer_id -> job_title -> job_industry_category - вынесем в таблицу job
 
   transaction, product - находится в 3НФ: приведена к 2НФ в шаге 2.2., отсутствуют транзитивные зависимости
 
