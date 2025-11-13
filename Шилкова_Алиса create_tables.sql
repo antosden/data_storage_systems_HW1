@@ -13,7 +13,7 @@ create table address (
 );
 
 create table customer (
-  customer_id	c primary key unique,
+  customer_id primary key unique,
   job_id integer references job(job_id),
   address_id integer references address,
   first_name	varchar not null,
@@ -47,4 +47,5 @@ create table transaction (
   online_order	bool not null,
   order_status	varchar not null,
   foreign key (product_id, product_size) references product(product_id, product_size)
+
 );
